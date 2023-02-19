@@ -33,7 +33,7 @@ router.post("/addUser", (req, res) => {
                                 expiresIn: 86400 // expires in 24 hours
                             });
                             console.log("Token done.")
-                            res.status(200).send({ auth: true, token: token });
+                            res.status(200).send({ auth: true, token: token , user:user});
                         });
                     // user.save(err => {
                     //     if (err) {
@@ -96,7 +96,7 @@ router.use(function (user, req, res, next) {
     res.status(200).send(user);
 });
 
-router.get('/getUser', (req, res) => {
+router.get('/allUser', (req, res) => {
     Users.find()
         .then(data => {
             console.log(data);

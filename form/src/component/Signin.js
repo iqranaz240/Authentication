@@ -14,7 +14,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import  {useState} from 'react'; 
-
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -34,6 +34,9 @@ const theme = createTheme();
 export default function SignIn() {
   const [email, setEmail] = useState(''); 
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+    let jwtToken = null; 
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -42,6 +45,18 @@ export default function SignIn() {
       password
     }).then(res => {
       console.log(res);
+      if (res.data.auth === true)
+      {
+        let data = {token: res.data.token}
+        navigate('/home', { state:data});
+      }
+      else
+      {
+        alert("Invalid email/password.")
+      }
+    })
+    .catch(err => {
+      alert("Try Again.")
     });
   };
 

@@ -13,7 +13,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import  {useState} from 'react'; 
-
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -37,6 +37,8 @@ export default function SignUp() {
   const [firstName, setFirstName] = useState(''); 
   const [lastName, setLastName] = useState(''); 
 
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     axios.post('http://localhost:4000/user/addUser', {
@@ -46,6 +48,10 @@ export default function SignUp() {
       password
     }).then(res => {
       console.log(res);
+      if (res.data.auth === true)
+      {
+        navigate('/signin');
+      }
     }); 
   };
 
