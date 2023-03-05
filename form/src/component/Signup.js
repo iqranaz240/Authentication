@@ -41,7 +41,7 @@ export default function SignUp() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:4000/user/addUser', {
+    axios.post('https://authentication-2wzz65y4q-iqranaz240.vercel.app/user/addUser', {
       firstName,
       lastName,
       email,
